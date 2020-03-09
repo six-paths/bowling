@@ -14,11 +14,6 @@ final class BowlingGameTest extends TestCase
         $this->game = new Game;
     }
 
-    public function testCanRoll(): void
-    {
-        $this->game->roll(0);
-    }
-
     public function testGutterGame(): void
     {
         for ($i = 0; $i < 20; $i++) {
