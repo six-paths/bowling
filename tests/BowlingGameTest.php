@@ -4,14 +4,18 @@ use PHPUnit\Framework\TestCase;
 
 final class BowlingGameTest extends TestCase
 {
-    public function testCanStartNewGame(): void
+    /**
+     * @var \Game
+     */
+    private $game;
+
+    public function setUp(): void
     {
-        new Game;
+        $this->game = new Game;
     }
 
     public function testCanRoll(): void
     {
-        $game = new Game;
-        $game->roll(0);
+        $this->game->roll(0);
     }
 }
