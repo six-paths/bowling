@@ -8,4 +8,10 @@ final class BowlingGameTest extends TestCase
     {
         new Game;
     }
+
+    public function testCanRoll(): void
+    {
+        $game = new Game;
+        $game->roll(0);
+    }
 }
