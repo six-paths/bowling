@@ -18,4 +18,13 @@ final class BowlingGameTest extends TestCase
     {
         $this->game->roll(0);
     }
+
+    public function testGutterGame(): void
+    {
+        for ($i = 0; $i < 20; $i++) {
+            $this->game->roll(0);
+        }
+
+        $this->assertEquals(0, $this->game->getScore());
+    }
 }
