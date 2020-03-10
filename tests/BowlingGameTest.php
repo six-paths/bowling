@@ -47,6 +47,13 @@ final class BowlingGameTest extends TestCase
         $this->assertEquals(24, $this->game->getScore());
     }
 
+    public function testPerfectGame(): void
+    {
+        $this->rollMany(12, 10);
+
+        $this->assertEquals(300, $this->game->getScore());
+    }
+
     private function rollMany(int $rolls, int $pins): void
     {
         for ($i = 0; $i < $rolls; $i++) {
