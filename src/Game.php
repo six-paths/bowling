@@ -24,24 +24,46 @@ final class Game
         $rollIndex = 0;
 
         for ($frame = 0; $frame < 10; $frame++) {
-            if ($this->rolls[$rollIndex] === 10) {
-                $score += 10;
-                $score += $this->rolls[$rollIndex + 1];
-                $score += $this->rolls[$rollIndex + 2];
+            if ($this->isStrike($rollIndex)) {
+                $score += 10 + $this->getAddedScoreForStrike($rollIndex);
 
                 $rollIndex++;
-            } elseif ($this->rolls[$rollIndex] + $this->rolls[$rollIndex + 1] === 10) {
-                $score += 10;
-                $score += $this->rolls[$rollIndex + 2];
+            } elseif ($this->isSpare($rollIndex)) {
+                $score += 10 + $this->getAddedScoreForSpare($rollIndex);
 
                 $rollIndex += 2;
             } else {
-                $score += $this->rolls[$rollIndex] + $this->rolls[$rollIndex + 1];
+                $score += $this->getFrameScore($rollIndex);
 
                 $rollIndex += 2;
             }
         }
 
         return $score;
+    }
+
+    private function isStrike(int $rollIndex): bool
+    {
+        return $this->rolls[$rollIndex] === 10;
+    }
+
+    private function getAddedScoreForStrike(int $rollIndex): int
+    {
+        return $this->rolls[$rollIndex + 1] + $this->rolls[$rollIndex + 2];
+    }
+
+    private function isSpare(int $rollIndex): bool
+    {
+        return $this->rolls[$rollIndex] + $this->rolls[$rollIndex + 1] === 10;
+    }
+
+    private function getAddedScoreForSpare(int $rollIndex): int
+    {
+        return $this->rolls[$rollIndex + 2];
+    }
+
+    private function getFrameScore(int $rollIndex): int
+    {
+        return $this->rolls[$rollIndex] + $this->rolls[$rollIndex + 1];
     }
 }
